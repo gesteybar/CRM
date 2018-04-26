@@ -131,6 +131,18 @@ Public Class WebService1
 
     End Sub
 
+    <WebMethod()> _
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json, UseHttpGET:=True)> _
+    Public Sub LeerPermisos(user As Integer)
+        Dim Cadena As String = "exec SP_LeerPermisos " & user
+
+        Context.Response.ContentType = "application/json"
+        Context.Response.Write(LeerDatos(Cadena))
+        Context.Response.End()
+
+
+    End Sub
+
     Function LeerDatos(query As String) As String
 
         Dim C As New ADODB.Connection, R As New ADODB.Recordset

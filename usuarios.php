@@ -63,7 +63,7 @@ function popup(id, obj) {
 		var fc='Habilitar usuario';
 		var img='greenalert.png';		
 	}	
-	var jason=[{"Op":"Ver / Modificar usuario","Fc":"editar('"+id+"')", "img":"pencil.png"},{"Op":"Permisos", "Fc":"permisos('"+id+"')", "img":"permisos.png"},{"Op":fc, "Fc":"blockear('"+id+"')", "img":img},{"Op":"Borrar usuario", "Fc":"eliminarUsuario('"+id+"')", "img":"trash.png"}];
+	var jason=[{"Op":"Ver / Modificar usuario","Fc":"editar('"+id+"')", "img":"pencil.png"},{"Op":"Permisos", "Fc":"mostrarPermisos('"+id+"')", "img":"permisos.png"},{"Op":fc, "Fc":"blockear('"+id+"')", "img":img},{"Op":"Borrar usuario", "Fc":"eliminarUsuario('"+id+"')", "img":"trash.png"}];
 	showPopup(jason, rect.left-100, rect.top, '','classPopup',document.getElementsByClassName('fondo')[0]);	
 	
 }
@@ -179,7 +179,7 @@ function blockear(id) {
 function eliminarUsuario(id) {
 	if (!confirm('Confirma eliminar permanentemente este usuario?'))
 		return false;
-	
+
 	var user=id;
 	quitarPopup();
 	oAjax.request="DeleteUser?user="+user+"&autor="+currUser;
@@ -200,6 +200,29 @@ function eliminarUsuario(id) {
 
 		}
 	}	
+}
+function mostrarPermisos(id) {
+	hidUsuario=id;
+	mostrar('winPermisos');
+	cargarPermisos();
+
+
+}
+function cargarPermisos() {
+	oAjax.request="LeerPermisos?user="+hidUsuario;
+	oAjax.send(resp);
+
+	function resp(data) {
+		if (data.responseText.length<3) {
+			alert('El usuario no existe');
+			cargarUsuarios();
+			return	false;
+		}
+
+		var obj=JSON.parse(data.responseText);
+		JsonToTable(obj, 'tbodyPermisos');
+		OcultarColumnaTabla('tbodyPermisos', 0);
+	}
 }
 function showMenu() {
 	
@@ -279,6 +302,23 @@ $(document).mouseup(function(e)
 				</tr>
 			</table>
 
+		</div>
+		<div class="ventana" id="winPermisos">
+			<h1 id="winNuevoTitulo">Editar permisos de usuario</h1>
+			<div id="permContainer">
+				<table class="tablaBase">
+					<thead>
+						<tr><th>Cod Módulo</th><th>Módulo</th><th>Permiso</th></tr>
+					</thead>
+					<tbody id="tbodyPermisos"></tbody>
+					<tfoot>
+						<tr><th colspan="10"></th></tr>
+					</tfoot>
+				</table>
+				
+				<button type="button" onclick="" class="boton btnAzul">Copiar permisos a otro usuario</button>
+				<button type="button" onclick="cerrar('winPermisos')" class="boton btnNaranja">Cerrar</button>
+			</div>
 		</div>
 	</div>
 	<div class="fondo">

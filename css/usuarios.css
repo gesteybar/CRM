@@ -6,5 +6,8 @@
 #tblUsuarios {width: 100%;}
 #tblUsuarios th {text-align: left;}
 
-#winNuevo {width: 70%;height: auto;min-height: 200px;}
+#winNuevo {width: 70%;height: auto;min-height: 200px;display: none}
 #winNuevo h1 {color:white;}
+
+#winPermisos {width: 70%;height: auto;min-height: 200px;display: none}
+#winPermisos h1 {color:white;}
