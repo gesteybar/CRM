@@ -1,0 +1,10 @@
+
+#wrapper {max-width: 95%;min-width:550px;width: 90vw; height: 85%;position: absolute;top:0;left: 65px;float:left;z-index: 10;padding-top: 87px;padding-left:0 }
+#wrapper h1 {font-family: oswald;font-size: 1.2em;color:rgb(50,90,120);font-weight: normal;border-bottom: 1px dotted;padding-bottom: 10px}
+
+#tblContainer {width: 100%;padding-left: 0px;background-color: rgb(70,110,120)}
+#tblUsuarios {width: 100%;}
+#tblUsuarios th {text-align: left;}
+
+#winNuevo {width: 70%;height: auto;min-height: 200px;}
+#winNuevo h1 {color:white;}
